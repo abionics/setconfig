@@ -4,7 +4,7 @@ Email: abionics.dev@gmail.com
 License: MIT
 """
 
-__version__ = '1.0.1'
+__version__ = '1.1.0'
 
 from dataclasses import is_dataclass
 from types import SimpleNamespace
@@ -50,7 +50,7 @@ def load_config_dict(
 def parse_simple(data: Any) -> Any:
     if isinstance(data, dict):
         parsed = {
-            key: parse_simple(value)
+            str(key): parse_simple(value)
             for key, value in data.items()
         }
         return SimpleNamespace(**parsed)
