@@ -31,12 +31,7 @@ setup(
     author_email='abionics.dev@gmail.com',
     url=URL,
     license='MIT',
-    keywords='config yaml dataclass pydantic setconfig',
-    install_requires=[
-        'pyyaml',
-        'dacite',
-        'pydantic',
-    ],
+    keywords='config yaml dataclass pydantic init',
     classifiers=[
         'Intended Audience :: Developers',
         'Intended Audience :: Education',
@@ -51,6 +46,12 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Typing :: Typed',
     ],
+    install_requires=[
+        'pyyaml',
+        'dacite',
+        'pydantic',
+    ],
+    package_data={PACKAGE_NAME: ['py.typed']},
     packages=find_packages(exclude=['examples']),
     zip_safe=False,
 )
