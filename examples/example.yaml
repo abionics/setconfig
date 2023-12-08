@@ -1,0 +1,14 @@
+timeout: 1.0
+connector:
+  title: "connector"
+  parallel: true
+nodes:
+  - host: "1.1.1.1"
+    port: 1000
+  - host: "2.2.2.2"
+    port: 2000
+matrix:
+  - - x: 42
+      y: 69
+  - - x: 420
+      y: 1337
