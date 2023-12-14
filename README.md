@@ -37,7 +37,7 @@ class Node:
 class Config:
     nodes: list[Node]
 
-config = load_config('config.yaml', data_class=Config)
+config = load_config('config.yaml', into=Config)
 
 print(config)
 # >>> Config(nodes=[Node(host='1.1.1.1', port=1000)])
@@ -58,7 +58,7 @@ class Node(BaseModel):
 class Config(BaseModel):
     nodes: list[Node]
 
-config = load_config('config.yaml', data_class=Config)
+config = load_config('config.yaml', into=Config)
 
 print(config)
 # >>> Config(nodes=[Node(host='1.1.1.1', port=1000)])
