@@ -4,9 +4,10 @@ Email: abionics.dev@gmail.com
 License: MIT
 """
 
-__version__ = '1.3.0'
+__version__ = '1.3.1'
 
 from dataclasses import is_dataclass
+from pathlib import Path
 from types import SimpleNamespace
 from typing import TypeVar, Type, Any
 
@@ -18,13 +19,13 @@ T = TypeVar('T')
 
 
 def load_config(
-        filename: str = 'config.yaml',
+        path: Path | str = 'config.yaml',
         into: Type[T] | None = None,
         override: dict | None = None,
         **kwargs,
 ) -> T:
-    with open(filename, 'r') as file:
-        data = yaml.safe_load(file)
+    with open(path, 'r') as file:
+        data = yaml.safe_load(file) or ''
     return load_config_dict(data, into, override, **kwargs)
 
 
