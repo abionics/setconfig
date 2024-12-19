@@ -1,4 +1,4 @@
-from examples.example_dataclass import Config
+from example_dataclass import Config
 from setconfig import load_config
 
 if __name__ == '__main__':

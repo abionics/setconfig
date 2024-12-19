@@ -12,6 +12,11 @@ Currently supported:
 - [x] Pydantic [`BaseModel`](https://docs.pydantic.dev/latest/api/base_model)
 - [x] Python [`SimpleNamespace`](https://docs.python.org/3/library/types.html#types.SimpleNamespace) (dotted dict)
 
+Features:
+- [x] Loading from streams
+- [x] Multiple config files
+- [x] Value overriding
+
 
 ## Installation
 
@@ -79,6 +84,33 @@ print(config.nodes[0].host)
 # >>> '1.1.1.1'
 ```
 
+### Features
+
+#### Loading from string/StringIO/etc
+```python
+from setconfig import load_config_stream
+
+config = load_config_stream('done: true')
+```
+
+#### Multiple config files, full sample [here](examples/example_multi.py)
+```python
+config = load_config('config.base.yaml', 'config.dev.yaml', 'config.feature-x.yaml', into=Config)
+```
+Configs are processed in the order they are passed to `load_config` (from left to right), where
+last overrides the previous ones
+
+#### Value overriding, full sample [here](examples/example_override.py)
+```python
+config = load_config('example.yaml', into=Config, override={'timeout': 10})
+```
+
+#### Extra parsing params
+```python
+# `check_types` is a dacite flag, see https://github.com/konradhalas/dacite#type-checking
+config = load_config('example.yaml', into=Config, check_types=False)
+```
+
 
 ## FAQ
 
@@ -87,16 +119,6 @@ print(config.nodes[0].host)
 > There should be one-- and preferably only one --obvious way to do it
 > 
 > [(c) Zen of Python](https://peps.python.org/pep-0020/#the-zen-of-python)
-
-### How to load from string/StringIO/etc?
-
-Use `load_config_stream`
-
-```python
-from setconfig import load_config_stream
-
-config = load_config_stream('done: true')
-```
 
 ### I want to use structure from `X` package
 

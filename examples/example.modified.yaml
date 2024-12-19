@@ -1,0 +1,5 @@
+timeout: 2.0
+connector:
+  ssl: true
+extra:
+  stage: "dev"
