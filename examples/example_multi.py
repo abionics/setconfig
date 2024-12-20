@@ -1,13 +1,11 @@
 from dataclasses import dataclass
 
-from example_dataclass import NodeConfig, Location
+from example_dataclass import Connector, NodeConfig, Location, Config
 from setconfig import load_config
 
 
 @dataclass(frozen=True, slots=True)
-class Connector:
-    title: str
-    parallel: bool
+class ConnectorV2(Connector):
     ssl: bool
 
 
@@ -17,15 +15,12 @@ class Extra:
 
 
 @dataclass(frozen=True, slots=True)
-class Config:
-    timeout: float
-    connector: Connector
-    nodes: list[NodeConfig]
-    matrix: list[list[Location]]
+class ConfigV2(Config):
+    connector: ConnectorV2
     extra: Extra
 
 
 if __name__ == '__main__':
-    config = load_config('example.yaml', 'example.modified.yaml', into=Config)
+    config = load_config('config.yaml', 'config.extra.yaml', into=ConfigV2)
     print(config.extra)  # Extra(stage='dev')
     print(config)

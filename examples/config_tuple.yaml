@@ -1,0 +1,6 @@
+shape: [1920, 1080]
+server:
+  domains: ['example.com']
+locations:
+  - coords: [38.897778, -77.036389]
+  - coords: [0, 0]

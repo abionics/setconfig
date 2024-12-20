@@ -16,6 +16,7 @@ Features:
 - [x] Loading from streams
 - [x] Multiple config files
 - [x] Value overriding
+- [x] Tuple-friendly
 
 
 ## Installation
@@ -87,6 +88,7 @@ print(config.nodes[0].host)
 ### Features
 
 #### Loading from string/StringIO/etc
+
 ```python
 from setconfig import load_config_stream
 
@@ -94,22 +96,33 @@ config = load_config_stream('done: true')
 ```
 
 #### Multiple config files, full sample [here](examples/example_multi.py)
+
 ```python
 config = load_config('config.base.yaml', 'config.dev.yaml', 'config.feature-x.yaml', into=Config)
 ```
+
 Configs are processed in the order they are passed to `load_config` (from left to right), where
 last overrides the previous ones
 
 #### Value overriding, full sample [here](examples/example_override.py)
+
 ```python
-config = load_config('example.yaml', into=Config, override={'timeout': 10})
+config = load_config('config.yaml', into=Config, override={'timeout': 10})
 ```
 
 #### Extra parsing params
+
 ```python
-# `check_types` is a dacite flag, see https://github.com/konradhalas/dacite#type-checking
-config = load_config('example.yaml', into=Config, check_types=False)
+config = load_config('config.yaml', into=Config, check_types=False)
 ```
+
+Where `check_types` is a dacite flag, see https://github.com/konradhalas/dacite#type-checking
+
+#### Tuple-friendly
+
+There is [known issue](https://github.com/konradhalas/dacite/issues/227) in `dacite` that raises type error
+when loading list into tuple. [Pull request with fix is ready](https://github.com/konradhalas/dacite/pull/228)
+since May 2023, but not merged yet... That's why `setconfig` has its own fix
 
 
 ## FAQ
